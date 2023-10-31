@@ -23,6 +23,7 @@ namespace EaterShell
             if (commands.TryGetValue(cmd, out Type commandType))
             {
                 Command commandInstance = (Command)Activator.CreateInstance(commandType);
+                commandInstance.OutputWriter = new ConsoleOutputWriter();
                 return commandInstance;
             }
             return null;

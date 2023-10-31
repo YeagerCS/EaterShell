@@ -42,7 +42,6 @@ namespace EaterShell
             string user = Environment.UserName;
             directory = @"C:\Users\" + user;
 
-            //No code mache dasses apasst wird wenn mit CdCommand de directory apasst wird
 
         }
     }
