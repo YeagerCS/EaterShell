@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace EaterShell
         {
             string directory = Directory.GetCurrentDirectory();
             string[] files = Directory.GetFileSystemEntries(directory);
-
+                
             int fileCount = 0;
             int dirCount = 0;
             long totalFileSize = 0;

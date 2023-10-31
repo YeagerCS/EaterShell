@@ -10,6 +10,7 @@ namespace EaterShell
     {
         public abstract string Name { get; }
         public virtual string[] Parameters { get; set; }
+        public virtual IOutputWriter OutputWriter { get; set; }
         public abstract void Execute();
 
     }
