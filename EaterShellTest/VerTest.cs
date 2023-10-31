@@ -6,9 +6,9 @@ namespace EaterShellTest
     public class VerTest
     {
         [TestMethod]
-        public void VerCommand_OutputTest()
+        public void ShellIsOpen_UserInputEqualsVer_OutputWindowsVersion()
         {
-            string expected = "Microsoft Windows NT 10.0.22621.0";
+            string expected = Environment.OSVersion.ToString();
             TestOutputWriter testOutputWriter = new TestOutputWriter();
             VerCommand verCommand = new(testOutputWriter);
 
