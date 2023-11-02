@@ -11,8 +11,15 @@ namespace EaterShell
     {
             
         public override string Name => "color";
+        private ConsoleColor foregroundColorTest;
+        private ConsoleColor backgroundColorTest;
 
         public ColorCommand() { }
+
+        public ColorCommand(IOutputWriter outputWriter)
+        {
+            OutputWriter = outputWriter;
+        }
 
         public override void Execute()
         {
@@ -21,27 +28,33 @@ namespace EaterShell
             {
                 if (Enum.TryParse(Parameters[0], true, out ConsoleColor foregroundColor))
                 {
-                    Console.ForegroundColor = foregroundColor;
+                    OutputWriter.ForegroundColor = foregroundColor;
                 }
 
                 if (Parameters.Length >= 2)
                 {
-                    if (Parameters[1] == ".")
+                    if (Parameters[0] == ".")
                     {
-                        if (Enum.TryParse(Parameters[2], true, out ConsoleColor backgroundColor))
+                        if (Enum.TryParse(Parameters[1], true, out ConsoleColor backgroundColor))
                         {
-                            Console.BackgroundColor = backgroundColor;
-                            Console.Clear();
+                            OutputWriter.BackgroundColor = backgroundColor;
+
+                            OutputWriter.Clear();
                         }
                     }
                     else if (Enum.TryParse(Parameters[1], true, out ConsoleColor backgroundColor))
                     {
-                        Console.BackgroundColor = backgroundColor;
-                        Console.Clear();
+                        OutputWriter.BackgroundColor = backgroundColor;
+
+                        OutputWriter.Clear();
                     }
                 }
             }
 
+            if(OutputWriter is TestOutputWriter)
+            {
+                OutputWriter.WriteLine(foregroundColorTest.ToString() + ", " + backgroundColorTest.ToString());
+            }
         }
     }
 }
