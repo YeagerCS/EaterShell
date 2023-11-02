@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace EaterShell
@@ -45,9 +46,19 @@ namespace EaterShell
 
         public string[] GetParamters(string inputString)
         {
-            string[] parts = inputString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] parameters = parts.Skip(1).ToArray();
-            return parameters;
+            List<string> parameters = new List<string>();
+            var matches = Regex.Matches(inputString, @"(?<match>""(?:\\""|[^""])*"")|(\S+)");
+            bool firstMatch = true; 
+            foreach (Match match in matches)
+            {
+                if (firstMatch)
+                {
+                    firstMatch = false;
+                    continue; 
+                }
+                parameters.Add(match.Groups["match"].Success ? match.Groups["match"].Value.Trim('"') : match.Value);
+            }
+            return parameters.ToArray();
         }
     }
 }
