@@ -8,7 +8,15 @@ namespace EaterShell
 {
     public class TheFile : FileSystemItem
     {
-        public string Content { get; set; }   
+        public string Content { get; set; }  
+        
+        public TheFile(string name, string content) 
+        {
+            Name = name;    
+            Content = content;
+        }
+
+        public TheFile() { }
 
     }
 }
