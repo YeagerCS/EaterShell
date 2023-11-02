@@ -8,7 +8,10 @@ namespace EaterShell
 {
     public interface IOutputWriter
     {
+        ConsoleColor ForegroundColor { get; set; }
+        ConsoleColor BackgroundColor { get; set; }
         void Write(string value);
         void WriteLine(string value);
+        void Clear();
     }
 }
