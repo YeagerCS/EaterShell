@@ -8,6 +8,8 @@ namespace EaterShell
 {
     public class TheDirectory : FileSystemItem
     {
+        
+
         public List<FileSystemItem> FileSystemItems { get; set; }
 
         public TheDirectory(List<FileSystemItem> fileSystemItems, string name, DateTime createdOn, TheDirectory dir) 
