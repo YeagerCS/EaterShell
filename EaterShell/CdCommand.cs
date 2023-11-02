@@ -17,9 +17,9 @@ namespace EaterShell
 
         public override void Execute()
         {
-            PathHandler pathHandler = new PathHandler(Directory.GetCurrentDirectory());
+            PathHandler pathHandler = new PathHandler(PathDirectoryHandler.GetCurrentDirectory());
             string newPath = pathHandler.GetNewPath(Parameters[0]);
-            Directory.SetCurrentDirectory(newPath);
+            PathDirectoryHandler.SetCurrentDirectory(newPath);
         }
 
     }

@@ -14,7 +14,7 @@ namespace EaterShell
 
         public DirCommand() { }
 
-        public static string FormatNumber(long number)
+        public string FormatNumber(long number)
         {
             return number.ToString("#,##0");
         }
