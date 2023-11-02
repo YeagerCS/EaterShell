@@ -117,8 +117,21 @@ namespace EaterShell
 
         public bool EvalNewDirectory(string path)
         {
+
+            TheDirectory currDir;
+            if (Path.IsPathRooted(path))
+            {
+                currDir = PathDirectoryHandler.GetSelectedDrive().RootDirectory;
+                path = path.Substring(Path.GetPathRoot(path).Length);
+            }
+            else
+            {
+                currDir = PathDirectoryHandler.GetTheDirectory();
+            }
+
             string[] pathParts = path.Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
-            TheDirectory currDir = PathDirectoryHandler.GetTheDirectory();
+            
+
 
             foreach (string dirName in pathParts)
             {
@@ -151,6 +164,41 @@ namespace EaterShell
 
 
             return foundDir;
+        }
+
+        public FileSystemItem SearchFileSystemItem(string path)
+        {
+            FileSystemItem foundFileSystemItem = null;
+            string[] parts = path.Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
+            TheDirectory currentDir = PathDirectoryHandler.GetTheDirectory();
+
+            for(int i = 0; i < parts.Length; i++)
+            {
+                string part = parts[i];
+
+                if (part.Contains("."))
+                {
+                    FileSystemItem item = currentDir.FileSystemItems.FirstOrDefault(f => f.Name == part);
+
+                    if (item != null)
+                    {
+                        foundFileSystemItem = item;
+                    }
+                }
+                else
+                {
+                    //it's a dir
+                    bool eval = EvalNewDirectory(part);
+                    if(eval)
+                    {
+                        currentDir = PathDirectoryHandler.GetTheDirectory();
+                        foundFileSystemItem = currentDir;
+                    } 
+                }
+            }
+
+            return foundFileSystemItem;
+
         }
 
     }
