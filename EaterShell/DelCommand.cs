@@ -22,14 +22,38 @@ namespace EaterShell
                 TheFile fileToDelete = pathHandler.SearchFileSystemItem(Parameters[0]) as TheFile;
 
                 TheDirectory selectedDir = PathDirectoryHandler.GetTempDirectory();
+                
 
                 selectedDir.FileSystemItems.Remove(fileToDelete);
+                UpdateParentDirectoriesSize(fileToDelete);
             }
             else
             {
                 OutputWriter.WriteLine($"{Parameters[0]} is not a valid file");
             }
 
+            PersistenceService.Save(PathDirectoryHandler.GetSelectedDrive());
+
         }
+
+        public void UpdateParentDirectoriesSize(TheFile newFile)
+        {
+            long fileSize = newFile.Size;
+
+            TheDirectory parentDirectory = newFile.ParentDirectory;
+
+            parentDirectory.Size -= fileSize;
+
+            TheDirectory currentDirectory = parentDirectory;
+            while (currentDirectory.ParentDirectory != null)
+            {
+                currentDirectory = currentDirectory.ParentDirectory;
+                currentDirectory.Size -= fileSize;
+            }
+
+            PathDirectoryHandler.GetSelectedDrive().Size -= fileSize;
+        }
+
+        
     }
 }
