@@ -78,7 +78,6 @@ namespace EaterShell
         {
             TheDirectory currentDir = PathDirectoryHandler.GetTheDirectory();
             TheDirectory newDir = currentDir.ParentDirectory;
-            Console.WriteLine("NewDir " + currentDir.ParentDirectory);
 
             PathDirectoryHandler.SetTheDirectory(newDir);
         }

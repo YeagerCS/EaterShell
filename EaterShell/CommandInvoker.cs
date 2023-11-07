@@ -13,7 +13,14 @@ namespace EaterShell
         {
             Command command = CommandFactory.CreateCommand(commandStr);
             command.Parameters = parameters;
-            command.Execute();
+            try
+            {
+                command.Execute();
+            } catch (Exception ex)
+            {
+                Console.WriteLine("Invalid Command Syntax.");
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

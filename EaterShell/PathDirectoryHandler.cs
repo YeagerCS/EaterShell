@@ -56,5 +56,20 @@ namespace EaterShell
             return currentDirectory;
         }
 
+        public static string GetFullPath(string basePath, string relativePath)
+        {
+            if (Path.IsPathRooted(relativePath))
+            {
+                return relativePath;
+            }
+
+            string fullPath = Path.Combine(basePath, relativePath);
+
+            fullPath = Path.GetFullPath(fullPath);
+
+            return fullPath;
+        }
+
+
     }
 }

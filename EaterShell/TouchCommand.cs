@@ -14,15 +14,24 @@ namespace EaterShell
 
         public override void Execute()
         {
-            PathHandler pathHandler = new PathHandler(PathDirectoryHandler.GetCurrentDirectory());
-            pathHandler.SearchFileSystemItem(Parameters[0]);
+            Parameters[0] = PathDirectoryHandler.GetFullPath(PathDirectoryHandler.GetCurrentDirectory(), Parameters[0]);
 
-            TheDirectory selectedDir = PathDirectoryHandler.GetTempDirectory();
+            PathHandler pathHandler = new PathHandler(PathDirectoryHandler.GetCurrentDirectory());
+            
 
             TheFile file = new();
             string[] parts = Parameters[0].Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
             string filename = parts[parts.Length - 1];
 
+            if (!filename.Contains("."))
+            {
+                filename = filename + ".txt";
+                Parameters[0] = Parameters[0] + ".txt";
+            }
+
+            pathHandler.SearchFileSystemItem(Parameters[0]);
+
+            TheDirectory selectedDir = PathDirectoryHandler.GetTempDirectory();
             foreach (FileSystemItem fsi in selectedDir.FileSystemItems)
             {
                 if (fsi.Name == filename)

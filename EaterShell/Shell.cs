@@ -27,7 +27,6 @@ namespace EaterShell
             {
                 Console.Write(PathDirectoryHandler.GetCurrentDirectory() + ">");
                 PathHandler pathHandler = new PathHandler(PathDirectoryHandler.GetCurrentDirectory());
-                Console.WriteLine("esse\t" + PathDirectoryHandler.GetTheDirectory().Name);
                 userInput = Console.ReadLine();
 
                 string cmd = commandParser.GetCommand(userInput);

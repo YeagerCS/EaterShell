@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace EaterShell
@@ -19,6 +20,8 @@ namespace EaterShell
 
         public override void Execute()
         {
+            Parameters[0] = PathDirectoryHandler.GetFullPath(PathDirectoryHandler.GetCurrentDirectory(), Parameters[0]);
+
             string filename = Parameters[0];
             if (!filename.Contains("."))
             {
@@ -30,7 +33,8 @@ namespace EaterShell
                 TheFile meantFile = pathHandler.SearchFileSystemItem(filename) as TheFile;
                 if (meantFile != null)
                 {
-                    OutputWriter.WriteLine(meantFile.Content);
+                    string unescapedContent = Regex.Unescape(meantFile.Content);
+                    OutputWriter.WriteLine(unescapedContent);
                 }
                 else
                 {
