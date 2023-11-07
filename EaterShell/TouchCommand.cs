@@ -14,15 +14,18 @@ namespace EaterShell
 
         public override void Execute()
         {
-            TheDirectory currentDir = PathDirectoryHandler.GetTheDirectory();
+            PathHandler pathHandler = new PathHandler(PathDirectoryHandler.GetCurrentDirectory());
+            pathHandler.SearchFileSystemItem(Parameters[0]);
+
+            TheDirectory selectedDir = PathDirectoryHandler.GetTempDirectory();
 
             TheFile file = new();
-
-            file.Name = Parameters[0];
-
+            string[] parts = Parameters[0].Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
+            string filename = parts[parts.Length - 1];
+            file.Name = filename;
             file.Content = Parameters[1].ToString();
 
-            currentDir.AddItem(file);
+            selectedDir.AddItem(file);
 
             PersistenceService.Save(PathDirectoryHandler.GetSelectedDrive());
         }

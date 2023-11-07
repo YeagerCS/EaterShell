@@ -115,7 +115,7 @@ namespace EaterShell
             }
         }
 
-        public bool EvalNewDirectory(string path)
+        public bool EvalNewDirectory(string path, bool mod = false)
         {
 
             TheDirectory currDir;
@@ -126,7 +126,7 @@ namespace EaterShell
             }
             else
             {
-                currDir = PathDirectoryHandler.GetTheDirectory();
+                currDir = !mod ? PathDirectoryHandler.GetTheDirectory() : PathDirectoryHandler.GetTempDirectory();
             }
 
             string[] pathParts = path.Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
@@ -147,7 +147,14 @@ namespace EaterShell
                 }
             }
 
-            PathDirectoryHandler.SetTheDirectory(currDir);
+            if (mod)
+            {
+                PathDirectoryHandler.SetTempDirectory(currDir);
+            }
+            else
+            {
+                PathDirectoryHandler.SetTheDirectory(currDir);
+            }
             return true;
         }
 
@@ -171,6 +178,7 @@ namespace EaterShell
             FileSystemItem foundFileSystemItem = null;
             string[] parts = path.Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
             TheDirectory currentDir = PathDirectoryHandler.GetTheDirectory();
+            PathDirectoryHandler.SetTempDirectory(currentDir);
 
             for(int i = 0; i < parts.Length; i++)
             {
@@ -188,10 +196,10 @@ namespace EaterShell
                 else
                 {
                     //it's a dir
-                    bool eval = EvalNewDirectory(part);
+                    bool eval = EvalNewDirectory(part, parts.Length > 1);
                     if(eval)
                     {
-                        currentDir = PathDirectoryHandler.GetTheDirectory();
+                        currentDir = PathDirectoryHandler.GetTempDirectory();
                         foundFileSystemItem = currentDir;
                     } 
                 }
