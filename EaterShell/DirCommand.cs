@@ -21,47 +21,44 @@ namespace EaterShell
 
         public override void Execute()
         {
-            string directory = Directory.GetCurrentDirectory();
-            string[] files = Directory.GetFileSystemEntries(directory);
-                
+            Random random = new Random();
+            TheDirectory directory = PathDirectoryHandler.GetTheDirectory();
+            List<FileSystemItem> files = directory.FileSystemItems;
+
             int fileCount = 0;
             int dirCount = 0;
             long totalFileSize = 0;
-            DriveInfo driveInfo = new DriveInfo(Path.GetPathRoot(directory));
+            long totalDirSize = 0;
 
-            foreach (string file in files)
+            foreach (FileSystemItem file in files)
             {
-                FileInfo fileInfo = new FileInfo(file);
-                FileAttributes attributes = File.GetAttributes(file); 
-                if ((attributes & FileAttributes.Hidden) == 0 && (attributes & FileAttributes.System) == 0)
+                DateTime lastMod = file.CreatedOn;
+                string fileSize = "";
+
+                Console.Write($"{lastMod:dd/MM/yyyy}\t");
+                Console.Write($"{lastMod:HH:mm}\t");
+
+                if (file is TheDirectory)
                 {
-                    DateTime lastMod = fileInfo.LastWriteTime;
-                    string fileSize = "";
-
-                    Console.Write($"{lastMod:dd/MM/yyyy}\t");
-                    Console.Write($"{lastMod:HH:mm}\t");
-
-                    if (fileInfo.Attributes.HasFlag(FileAttributes.Directory))
-                    {
-                        Console.Write($"[Dir]\t");
-                        dirCount++;
-                    } else
-                    {
-                        long fileSizeKb = fileInfo.Length;
-                        totalFileSize += fileSizeKb;
-                        fileSize = FormatNumber(fileSizeKb);
-                        Console.Write($"\t");
-                        Console.Write($"{fileSize}");
-                        fileCount++;
-                    }
-                    Console.Write("\t");
-                    Console.WriteLine($"{Path.GetFileName(file)}");
-
+                    Console.Write($"[Dir]\t");
+                    totalDirSize += random.Next(10, 1024);
+                    dirCount++;
                 }
+                else
+                {
+                    long n = random.Next(10, 1024);
+                    Console.Write($"\t");
+                    Console.Write($"{n}");
+                    totalFileSize += n;
+                    fileCount++;
+                }
+                Console.Write("\t");
+                Console.WriteLine($"{file.Name}");
+
             }
 
             Console.WriteLine($"\n\t\t{fileCount} File(s)\t{FormatNumber(totalFileSize)} bytes");
-            Console.WriteLine($"\t\t{dirCount} Dir(s)\t{FormatNumber(driveInfo.TotalFreeSpace)} bytes free");
+            Console.WriteLine($"\t\t{dirCount} Dir(s)\t{FormatNumber(totalDirSize)} bytes");
 
         }
     }
