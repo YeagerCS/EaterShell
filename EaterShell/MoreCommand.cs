@@ -17,6 +17,7 @@ namespace EaterShell
 
         public override void Execute()
         {
+            Parameters[0] = PathDirectoryHandler.GetFullPath(PathDirectoryHandler.GetCurrentDirectory(), Parameters[0]);
             int windowHeight = Console.WindowHeight;
             Console.WriteLine(windowHeight);
 
@@ -30,6 +31,12 @@ namespace EaterShell
                 PathHandler pathHandler = new(PathDirectoryHandler.GetCurrentDirectory());
                 TheFile meantFile = pathHandler.SearchFileSystemItem(filename) as TheFile;
 
+
+                if(meantFile == null)
+                {
+                    OutputWriter.WriteLine($"{Parameters[0]} not found.");
+                    return;
+                }
                 string[] parts = meantFile.Content.Split("\\n");
 
                 for (int i = 0; i < parts.Length; i++)
@@ -50,7 +57,8 @@ namespace EaterShell
 
                         if (currentPartIndex < parts.Length)
                         {
-                            string msg = "Press space to show more or any other key to exit.";
+                            int percent = (100 / parts.Length) * currentPartIndex;
+                            string msg = $"Press space to show more (..{percent}%..)";
                             OutputWriter.WriteLine(msg);
                             ConsoleKeyInfo keyInfo = Console.ReadKey();
                             if (keyInfo.Key != ConsoleKey.Spacebar)

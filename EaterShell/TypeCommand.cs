@@ -20,6 +20,8 @@ namespace EaterShell
 
         public override void Execute()
         {
+            Parameters[0] = PathDirectoryHandler.GetFullPath(PathDirectoryHandler.GetCurrentDirectory(), Parameters[0]);
+
             string filename = Parameters[0];
             if (!filename.Contains("."))
             {
