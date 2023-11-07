@@ -184,7 +184,7 @@ namespace EaterShell
             {
                 string part = parts[i];
 
-                if (part.Contains("."))
+                if (part.Contains(".") && !part.StartsWith(".."))
                 {
                     FileSystemItem item = currentDir.FileSystemItems.FirstOrDefault(f => f.Name == part);
 
@@ -196,7 +196,7 @@ namespace EaterShell
                 else
                 {
                     //it's a dir
-                    bool eval = EvalNewDirectory(part, parts.Length > 1);
+                    bool eval = EvalNewDirectory(part, true);
                     if(eval)
                     {
                         currentDir = PathDirectoryHandler.GetTempDirectory();
