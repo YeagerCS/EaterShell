@@ -12,7 +12,6 @@ namespace EaterShell
         public string OutputBuffer { get; set; }
         public ConsoleColor ForegroundColor { get; set; }
         public ConsoleColor BackgroundColor { get; set; }
-
         public void Write(string value)
         {
             OutputBuffer = value;
