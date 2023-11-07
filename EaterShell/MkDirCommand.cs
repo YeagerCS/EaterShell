@@ -14,6 +14,7 @@ namespace EaterShell
         {
             PathHandler pathHandler = new PathHandler(PathDirectoryHandler.GetCurrentDirectory());
 
+            Parameters[0] = PathDirectoryHandler.GetFullPath(PathDirectoryHandler.GetCurrentDirectory(), Parameters[0]);
             string[] strings = Parameters[0].Split("\\");
             string result = "";
             if(strings.Length >= 2)

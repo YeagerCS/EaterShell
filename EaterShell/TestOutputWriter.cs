@@ -24,5 +24,6 @@ namespace EaterShell
         public void Clear()
         {
         }
+
     }
 }

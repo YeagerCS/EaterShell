@@ -25,6 +25,10 @@ namespace EaterShell
             item.ParentDirectory = this;
             FileSystemItems.Add(item);
         }
+        public TheDirectory Clone()
+        {
+            return (TheDirectory)this.MemberwiseClone();
+        }
 
         public TheDirectory() { }
 

@@ -13,6 +13,7 @@ namespace EaterShell
 
         public override void Execute()
         {
+            Parameters[0] = PathDirectoryHandler.GetFullPath(PathDirectoryHandler.GetCurrentDirectory(), Parameters[0]);
             string[] parts = Parameters[0].Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
             string filename = parts[parts.Length - 1];
 
