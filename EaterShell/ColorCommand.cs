@@ -11,8 +11,6 @@ namespace EaterShell
     {
             
         public override string Name => "color";
-        private ConsoleColor foregroundColorTest;
-        private ConsoleColor backgroundColorTest;
 
         public ColorCommand() { }
 
@@ -49,11 +47,6 @@ namespace EaterShell
                         OutputWriter.Clear();
                     }
                 }
-            }
-
-            if(OutputWriter is TestOutputWriter)
-            {
-                OutputWriter.WriteLine(foregroundColorTest.ToString() + ", " + backgroundColorTest.ToString());
             }
         }
     }
