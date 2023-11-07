@@ -16,7 +16,6 @@ namespace EaterShellTest
             // Arrange
             TestOutputWriter output = new TestOutputWriter();
             ColorCommand colorCommand = new ColorCommand(output);
-            CommandInvoker invoker = new CommandInvoker();
 
             // Act
             colorCommand.Parameters = new string[] { "Red" };
@@ -32,7 +31,6 @@ namespace EaterShellTest
             // Arrange
             TestOutputWriter output = new TestOutputWriter();
             ColorCommand colorCommand = new ColorCommand(output);
-            CommandInvoker invoker = new CommandInvoker();
 
             // Act
             colorCommand.Parameters = new string[] {".", "Green" };
