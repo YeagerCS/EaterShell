@@ -10,6 +10,13 @@ namespace EaterShell
     {
         public override string Name => "type";
 
+        public TypeCommand() { }
+
+        public TypeCommand(IOutputWriter output)
+        {
+            OutputWriter = output;
+        }
+
         public override void Execute()
         {
             string filename = Parameters[0];
