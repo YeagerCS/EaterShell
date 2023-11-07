@@ -22,8 +22,19 @@ namespace EaterShell
             TheFile file = new();
             string[] parts = Parameters[0].Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
             string filename = parts[parts.Length - 1];
+
+            foreach (FileSystemItem fsi in selectedDir.FileSystemItems)
+            {
+                if (fsi.Name == filename)
+                {
+                    Console.WriteLine($"File '{filename}' already exists");
+                    return;
+                }
+            }
+
             file.Name = filename;
             file.Content = Parameters[1].ToString();
+            file.CreatedOn = DateTime.Now;
 
             selectedDir.AddItem(file);
 

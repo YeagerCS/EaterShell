@@ -173,6 +173,7 @@ namespace EaterShell
             return foundDir;
         }
 
+
         public FileSystemItem SearchFileSystemItem(string path)
         {
             FileSystemItem foundFileSystemItem = null;
@@ -196,7 +197,7 @@ namespace EaterShell
                 else
                 {
                     //it's a dir
-                    bool eval = EvalNewDirectory(part, parts.Length > 1);
+                    bool eval = EvalNewDirectory(part, true);
                     if(eval)
                     {
                         currentDir = PathDirectoryHandler.GetTempDirectory();
