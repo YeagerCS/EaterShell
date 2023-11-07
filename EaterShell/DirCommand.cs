@@ -41,15 +41,14 @@ namespace EaterShell
                 if (file is TheDirectory)
                 {
                     Console.Write($"[Dir]\t");
-                    totalDirSize += random.Next(10, 1024);
+                    totalDirSize += file.Size;
                     dirCount++;
                 }
                 else
                 {
-                    long n = random.Next(10, 1024);
                     Console.Write($"\t");
-                    Console.Write($"{n}");
-                    totalFileSize += n;
+                    Console.Write($"{file.Size}");
+                    totalFileSize += file.Size;
                     fileCount++;
                 }
                 Console.Write("\t");

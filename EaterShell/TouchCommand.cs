@@ -35,11 +35,44 @@ namespace EaterShell
             file.Name = filename;
             file.Content = Parameters[1].ToString();
             file.CreatedOn = DateTime.Now;
+            file.Size = GetFileSize(file);
 
             selectedDir.AddItem(file);
+            UpdateParentDirectoriesSize(file);
+
 
             PersistenceService.Save(PathDirectoryHandler.GetSelectedDrive());
         }
+
+        public void UpdateParentDirectoriesSize(TheFile newFile)
+        {
+            long fileSize = newFile.Size;
+
+            TheDirectory parentDirectory = newFile.ParentDirectory;
+
+            parentDirectory.Size += fileSize;
+
+            TheDirectory currentDirectory = parentDirectory;
+            while (currentDirectory.ParentDirectory != null)
+            {
+                currentDirectory = currentDirectory.ParentDirectory;
+                currentDirectory.Size += fileSize;
+            }
+
+            PathDirectoryHandler.GetSelectedDrive().Size += fileSize;
+        }
+
+        public long GetFileSize(TheFile file)
+        {
+            string contentString = file.Content;
+            Encoding encoding= Encoding.UTF8;
+
+            byte[] bytes = encoding.GetBytes(contentString);
+            long sizeInBytes = bytes.Length;
+
+            return sizeInBytes;
+        }
+
 
     }
 }
