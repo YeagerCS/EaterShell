@@ -185,7 +185,7 @@ namespace EaterShell
             {
                 string part = parts[i];
 
-                if (part.Contains("."))
+                if (part.Contains(".") && !part.StartsWith(".."))
                 {
                     FileSystemItem item = currentDir.FileSystemItems.FirstOrDefault(f => f.Name == part);
 
