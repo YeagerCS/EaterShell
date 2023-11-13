@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EaterShell.FileSystem;
+using EaterShell.FileSystem.Persistence;
+using EaterShell.PathHandling;
 
-namespace EaterShell
+namespace EaterShell.Main
 {
     public class ShellWorkspace
     {

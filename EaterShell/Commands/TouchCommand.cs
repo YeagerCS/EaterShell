@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EaterShell.FileSystem;
+using EaterShell.FileSystem.Persistence;
+using EaterShell.PathHandling;
 
-namespace EaterShell
+namespace EaterShell.Commands
 {
     public class TouchCommand : Command
     {
@@ -17,7 +20,7 @@ namespace EaterShell
             Parameters[0] = PathDirectoryHandler.GetFullPath(PathDirectoryHandler.GetCurrentDirectory(), Parameters[0]);
 
             PathHandler pathHandler = new PathHandler(PathDirectoryHandler.GetCurrentDirectory());
-            
+
 
             TheFile file = new();
             string[] parts = Parameters[0].Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
@@ -74,7 +77,7 @@ namespace EaterShell
         public long GetFileSize(TheFile file)
         {
             string contentString = file.Content;
-            Encoding encoding= Encoding.UTF8;
+            Encoding encoding = Encoding.UTF8;
 
             byte[] bytes = encoding.GetBytes(contentString);
             long sizeInBytes = bytes.Length;

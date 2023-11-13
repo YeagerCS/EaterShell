@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using EaterShell.PathHandling;
+using EaterShell.FileSystem;
 
-namespace EaterShell
+namespace EaterShell.Commands
 {
     public class MoreCommand : Command
     {
@@ -32,7 +34,7 @@ namespace EaterShell
                 TheFile meantFile = pathHandler.SearchFileSystemItem(filename) as TheFile;
 
 
-                if(meantFile == null)
+                if (meantFile == null)
                 {
                     OutputWriter.WriteLine($"{Parameters[0]} not found.");
                     return;
@@ -57,7 +59,7 @@ namespace EaterShell
 
                         if (currentPartIndex < parts.Length)
                         {
-                            int percent = (100 / parts.Length) * currentPartIndex;
+                            int percent = 100 / parts.Length * currentPartIndex;
                             string msg = $"Press space to show more (..{percent}%..)";
                             OutputWriter.WriteLine(msg);
                             ConsoleKeyInfo keyInfo = Console.ReadKey();

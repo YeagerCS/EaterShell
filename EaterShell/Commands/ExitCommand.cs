@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EaterShell
+namespace EaterShell.Commands
 {
-    public class ClsCommand : Command
+    public class ExitCommand : Command
     {
-        public override string Name => "cls";
 
+        public override string Name => "exit";
         public override void Execute()
         {
-            Console.Clear();
+            Environment.Exit(0);
         }
     }
 }

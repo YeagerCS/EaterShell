@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EaterShell.FileSystem;
+using EaterShell.PathHandling;
 
-namespace EaterShell
+namespace EaterShell.Commands
 {
     public class MoveCommand : Command
     {
@@ -14,7 +16,7 @@ namespace EaterShell
         public override void Execute()
         {
             string itemToMovePath = Parameters[0];
-            string dirToBeMovedTo = Parameters[1];
+            string dirToBeMovedTo = Parameters.Length > 1 ? Parameters[0] : PathDirectoryHandler.GetCurrentDirectory();
 
             string[] dirParts = dirToBeMovedTo.Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
             if (dirParts[dirParts.Length - 1].Contains("."))
@@ -24,6 +26,7 @@ namespace EaterShell
             }
 
             PathHandler pathHandler = new PathHandler(PathDirectoryHandler.GetCurrentDirectory());
+            itemToMovePath = PathDirectoryHandler.GetFullPath(PathDirectoryHandler.GetCurrentDirectory(), itemToMovePath);
             FileSystemItem movingItem = pathHandler.SearchFileSystemItem(itemToMovePath);
             TheDirectory dirContainingItem = PathDirectoryHandler.GetTempDirectory();
 
@@ -43,7 +46,7 @@ namespace EaterShell
             if (IsMoveValid(itemToMovePath, dirToBeMovedTo))
             {
                 //Commence the move
-                dirContainingItem.FileSystemItems.Remove(movingItem);
+                movingItem.ParentDirectory.FileSystemItems.Remove(movingItem);
 
                 TheDirectory dirToMoveTo = pathHandler.SearchFileSystemItem(dirToBeMovedTo) as TheDirectory;
 
@@ -64,8 +67,8 @@ namespace EaterShell
 
         public bool IsMoveValid(string itemToMove, string dirToBeMovedTo)
         {
-            itemToMove = Path.GetFullPath(itemToMove);
-            dirToBeMovedTo = Path.GetFullPath(dirToBeMovedTo);
+            itemToMove = PathDirectoryHandler.GetFullPath(PathDirectoryHandler.GetCurrentDirectory(), itemToMove);
+            dirToBeMovedTo = PathDirectoryHandler.GetFullPath(PathDirectoryHandler.GetCurrentDirectory(), dirToBeMovedTo);
 
             if (dirToBeMovedTo.StartsWith(itemToMove, StringComparison.OrdinalIgnoreCase))
             {
@@ -98,9 +101,9 @@ namespace EaterShell
                 finalDir.Size += movingItem.Size;
 
                 TheDirectory secondCurrentDirectory = finalDir;
-                while(secondCurrentDirectory.ParentDirectory != null)
+                while (secondCurrentDirectory.ParentDirectory != null)
                 {
-                    secondCurrentDirectory= secondCurrentDirectory.ParentDirectory;
+                    secondCurrentDirectory = secondCurrentDirectory.ParentDirectory;
                     secondCurrentDirectory.Size += movingItem.Size;
                 }
             }

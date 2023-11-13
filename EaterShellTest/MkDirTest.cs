@@ -1,4 +1,7 @@
-﻿using EaterShell;
+﻿using EaterShell.Commands;
+using EaterShell.FileSystem;
+using EaterShell.Main;
+using EaterShell.PathHandling;
 using System;
 using System.Collections.Generic;
 using System.Linq;

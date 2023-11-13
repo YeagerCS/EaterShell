@@ -1,4 +1,7 @@
-﻿using EaterShell;
+﻿using EaterShell.Commands;
+using EaterShell.FileSystem;
+using EaterShell.Main;
+using EaterShell.PathHandling;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +23,7 @@ namespace EaterShellTest
             TheFile theFile1 = pathHandler.SearchFileSystemItem(inputPath) as TheFile;
             if(theFile1 == null)
             {
-                Assert.Fail();
+                Assert.Fail("Test file doesn't exist");
             }
 
 

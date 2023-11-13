@@ -4,8 +4,11 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using EaterShell.FileSystem;
+using EaterShell.FileSystem.Persistence;
+using EaterShell.PathHandling;
 
-namespace EaterShell
+namespace EaterShell.Commands
 {
     public class RenCommand : Command
     {

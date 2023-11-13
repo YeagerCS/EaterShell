@@ -1,4 +1,5 @@
-﻿using EaterShell;
+﻿using EaterShell.Commands;
+using EaterShell.OutputWriters;
 using System;
 using System.Collections.Generic;
 using System.Linq;

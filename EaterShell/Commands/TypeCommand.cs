@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using EaterShell.FileSystem;
+using EaterShell.OutputWriters;
+using EaterShell.PathHandling;
 
-namespace EaterShell
+namespace EaterShell.Commands
 {
     public class TypeCommand : Command
     {

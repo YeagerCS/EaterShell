@@ -4,8 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EaterShell.FileSystem;
 
-namespace EaterShell
+namespace EaterShell.PathHandling
 {
     public class PathHandler
     {
@@ -58,7 +59,7 @@ namespace EaterShell
                             break;
                         }
                     }
-                    currentPath  = newPath;
+                    currentPath = newPath;
                 }
             }
 
@@ -129,7 +130,7 @@ namespace EaterShell
             }
 
             string[] pathParts = path.Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
-            
+
 
 
             foreach (string dirName in pathParts)
@@ -180,7 +181,7 @@ namespace EaterShell
             TheDirectory currentDir = PathDirectoryHandler.GetTheDirectory();
             PathDirectoryHandler.SetTempDirectory(currentDir);
 
-            for(int i = 0; i < parts.Length; i++)
+            for (int i = 0; i < parts.Length; i++)
             {
                 string part = parts[i];
 
@@ -197,11 +198,11 @@ namespace EaterShell
                 {
                     //it's a dir
                     bool eval = EvalNewDirectory(part, true);
-                    if(eval)
+                    if (eval)
                     {
                         currentDir = PathDirectoryHandler.GetTempDirectory();
                         foundFileSystemItem = currentDir;
-                    } 
+                    }
                 }
             }
 

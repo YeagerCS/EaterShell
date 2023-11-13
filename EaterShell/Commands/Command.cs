@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EaterShell.OutputWriters;
 
-namespace EaterShell
+namespace EaterShell.Commands
 {
     public abstract class Command
     {

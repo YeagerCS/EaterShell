@@ -4,12 +4,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EaterShell.OutputWriters;
 
-namespace EaterShell
+namespace EaterShell.Commands
 {
     public class ColorCommand : Command
     {
-            
+
         public override string Name => "color";
 
         public ColorCommand() { }

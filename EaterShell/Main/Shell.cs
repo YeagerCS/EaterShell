@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EaterShell.PathHandling;
 
-namespace EaterShell
+namespace EaterShell.Main
 {
     public class Shell
     {
@@ -13,8 +14,8 @@ namespace EaterShell
         public string userInput;
         public ShellWorkspace shellWorkspace;
 
-        public Shell() 
-        { 
+        public Shell()
+        {
             shellWorkspace = new ShellWorkspace();
         }
 
@@ -32,12 +33,12 @@ namespace EaterShell
                 string cmd = commandParser.GetCommand(userInput);
                 string[] parameters = commandParser.GetParamters(userInput);
 
-                if(!string.IsNullOrEmpty(cmd))
+                if (!string.IsNullOrEmpty(cmd))
                 {
                     commandInvoker.Execute(cmd, parameters);
                 }
 
-            }while(true);
+            } while (true);
         }
 
     }

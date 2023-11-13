@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EaterShell
+namespace EaterShell.FileSystem
 {
     public class Drive
     {
@@ -12,7 +12,7 @@ namespace EaterShell
         public string Name { get; set; }
         public long Size { get; set; }
         public string Label { get; set; }
-        public string FileSystemType { get; set; }  
+        public string FileSystemType { get; set; }
         public string DriveType { get; set; }
 
 

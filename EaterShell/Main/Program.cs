@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EaterShell
+namespace EaterShell.Main
 {
     public class Program
     {

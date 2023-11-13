@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EaterShell
+namespace EaterShell.FileSystem
 {
     public class TheDirectory : FileSystemItem
     {
-        
+
 
         public List<FileSystemItem> FileSystemItems { get; set; }
 
-        public TheDirectory(List<FileSystemItem> fileSystemItems, string name, DateTime createdOn, TheDirectory dir) 
+        public TheDirectory(List<FileSystemItem> fileSystemItems, string name, DateTime createdOn, TheDirectory dir)
         {
             FileSystemItems = fileSystemItems;
             Name = name;
             CreatedOn = createdOn;
-            ParentDirectory= dir;
+            ParentDirectory = dir;
         }
 
         public void AddItem(FileSystemItem item)
@@ -27,7 +27,7 @@ namespace EaterShell
         }
         public TheDirectory Clone()
         {
-            return (TheDirectory)this.MemberwiseClone();
+            return (TheDirectory)MemberwiseClone();
         }
 
         public TheDirectory() { }

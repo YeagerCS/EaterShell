@@ -1,6 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using EaterShell;
+using EaterShell.PathHandling;
+using EaterShell.FileSystem;
+using EaterShell.Commands;
+using EaterShell.OutputWriters;
+using EaterShell.FileSystem.Persistence;
+using EaterShell.Main;
 
 namespace EaterShellTest
 {

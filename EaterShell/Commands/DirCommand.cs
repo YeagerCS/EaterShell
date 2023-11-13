@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EaterShell.FileSystem;
+using EaterShell.PathHandling;
 
-namespace EaterShell
+namespace EaterShell.Commands
 {
     internal class DirCommand : Command
     {

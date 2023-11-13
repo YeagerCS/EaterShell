@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EaterShell.FileSystem;
+using EaterShell.FileSystem.Persistence;
+using EaterShell.PathHandling;
 
-namespace EaterShell
+namespace EaterShell.Commands
 {
     public class DelCommand : Command
     {
@@ -23,7 +26,7 @@ namespace EaterShell
                 TheFile fileToDelete = pathHandler.SearchFileSystemItem(Parameters[0]) as TheFile;
 
                 TheDirectory selectedDir = PathDirectoryHandler.GetTempDirectory();
-                
+
 
                 selectedDir.FileSystemItems.Remove(fileToDelete);
                 UpdateParentDirectoriesSize(fileToDelete);
@@ -55,6 +58,6 @@ namespace EaterShell
             PathDirectoryHandler.GetSelectedDrive().Size -= fileSize;
         }
 
-        
+
     }
 }
